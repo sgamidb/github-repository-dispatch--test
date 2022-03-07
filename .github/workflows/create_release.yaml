@@ -7,7 +7,6 @@ on:
         required: true
         description: Are you making a major version (a breaking change for consumers), minor one (new feature) or a patch (fix, documentation or technical enhancement) ?
         default: patch
-    branches: [ master ]
 
 env:
   NODE_VERSION_TARGET: '16'
@@ -21,6 +20,7 @@ jobs:
     steps:
       - name: Repository Dispatch - Sending release results
         run: |
+          echo $GITHUB_REPOSITORY
           curl \
             -X POST \
             -u ${{ secrets.REPO_ACCESS_USER }}:${{ secrets.REPO_ACCESS_TOKEN }} \
