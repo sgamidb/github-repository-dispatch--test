@@ -1,12 +1,6 @@
 name: Deploy
 
 on:
-  workflow_dispatch:
-    inputs:
-      tag:
-        description: "Release to deploy - please specify a version like x.x.x "
-        required: true
-      other:
   repository_dispatch:
     types: [ new-release_BU1, new-release_BU2, new-release_BU3 ]
 
@@ -14,15 +8,10 @@ env:
   NODE_VERSION_TARGET: '16'
 
 jobs:
-  Schema_checker_sit:
+  custom_job:
     runs-on: ubuntu-latest
 
-    environment:
-      name: SIT
-
     env:
-      NEXT_VERSION_FROM_RELEASE: ${{ github.event.client_payload.next_version }}
-      INPUT_TAG: ${{ github.event.inputs.tag }}
       SECRET_NAME: BU_${{ github.event.client_payload.bu }}
 
     steps:
@@ -31,6 +20,8 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION_TARGET }}
           cache: 'npm'
-      - name: Check environment's schemas
-        run: |
-          echo ${{ secrets[env.SECRET_NAME] }}
+      - name: use custom action$
+        uses: ./github/actions/test_action/
+        with:
+          user: $SECRET_NAME
+      
