@@ -4,7 +4,7 @@ inputs:
   user:
     description: "id of user"
     required: true
-output: 
+outputs: 
   success: 
     description: "success of process"
     value: ${{ steps.results.outputs.result }}
