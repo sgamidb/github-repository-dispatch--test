@@ -13,13 +13,11 @@ env:
 
 jobs:
 
-  send_release_results:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        bu: [ 'BU1', 'BU2', 'BU3']
-    steps:
-      - uses: actions/checkout@v3
-      - uses: ./.github/workflows/reusable-workflow.yml
-        with:
-          bu: ${{ matrix.bu }}
+  deploy_bu1:
+    uses: ./.github/workflows/reusable-workflow.yml
+    with:
+      bu: BU1
+  deploy_bu2:
+    uses: ./.github/workflows/reusable-workflow.yml
+    with:
+      bu: BU2
