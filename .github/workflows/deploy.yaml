@@ -16,10 +16,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: ${{ env.NODE_VERSION_TARGET }}
-          cache: 'npm'
       - name: use custom action$
         uses: ./github/actions/test_action/
         with:
