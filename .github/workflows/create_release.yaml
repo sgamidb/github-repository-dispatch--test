@@ -12,18 +12,13 @@ env:
   NODE_VERSION_TARGET: '16'
 
 jobs:
+
   send_release_results:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         bu: [ 'BU1', 'BU2', 'BU3']
     steps:
-      - name: Repository Dispatch - Sending release results
-        run: |
-          echo $GITHUB_REPOSITORY
-          curl \
-            -X POST \
-            -u ${{ secrets.REPO_ACCESS_USER }}:${{ secrets.REPO_ACCESS_TOKEN }} \
-            -H "Accept: application/vnd.github.v3+json" \
-            https://api.github.com/repos/$GITHUB_REPOSITORY/dispatches \
-            -d '{"event_type":"new-release_${{ matrix.bu }}", "client_payload": { "bu": "${{ matrix.bu }}" }}'
+      - uses: ./.github/workflows/reusable-workflow.yml
+        with:
+          bu: ${{ matrix.bu }}
