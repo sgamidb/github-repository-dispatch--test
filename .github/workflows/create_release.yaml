@@ -19,7 +19,7 @@ jobs:
       matrix:
         bu: [ 'BU1', 'BU2', 'BU3']
     steps:
-      - uses: action/checkout@v3
+      - uses: actions/checkout@v3
       - uses: ./.github/workflows/reusable-workflow.yml
         with:
           bu: ${{ matrix.bu }}
