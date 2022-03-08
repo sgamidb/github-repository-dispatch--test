@@ -11,7 +11,10 @@ output:
 runs: 
   using: "composite"
   steps:
-    - run: echo Hello ${{ inputs.user }}.
+    - run: echo Hello ${{ inputs.user }}
+      shell: bash
     - id: results
       run: echo "::set-output name=result::1"
-    - run: echo "$GITHUB_ACTION_PATH"        
+      shell: bash
+    - run: echo "$GITHUB_ACTION_PATH"
+      shell: bash
