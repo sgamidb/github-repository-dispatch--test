@@ -20,4 +20,4 @@ jobs:
       - name: use custom action$
         uses: ./.github/actions/test_action/
         with:
-          user: $SECRET_NAME
+          user: ${{ inputs.bu }}
