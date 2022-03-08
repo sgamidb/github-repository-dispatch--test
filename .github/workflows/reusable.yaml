@@ -23,7 +23,7 @@ jobs:
   second_custom_job:
     needs: [custom_job]
     environment: 
-      name: UAT
+      name: BU_${{inputs.bu}}
     runs-on: ubuntu-latest
 
     steps:
