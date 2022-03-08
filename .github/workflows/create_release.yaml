@@ -14,10 +14,10 @@ env:
 jobs:
 
   deploy_bu1:
-    uses: ./.github/workflows/reusable-workflow.yml
+    uses: ./.github/workflows/reusable.yaml
     with:
       bu: BU1
   deploy_bu2:
-    uses: ./.github/workflows/reusable-workflow.yml
+    uses: ./.github/workflows/reusable.yaml
     with:
       bu: BU2
