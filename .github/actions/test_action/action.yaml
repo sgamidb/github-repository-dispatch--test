@@ -1,0 +1,17 @@
+name: "Custom action"
+description: "Just a custom action"
+inputs:
+  user:
+    description: "id of user"
+    required: true
+output: 
+  success: 
+    description: "success of process"
+    value: ${{ steps.results.outputs.result }}
+runs: 
+  using: "composite"
+  steps:
+    - run: echo Hello ${{ inputs.user }}.
+    - id: results
+      run: echo "::set-output name=result::1"
+    - run: echo "$GITHUB_ACTION_PATH"        
