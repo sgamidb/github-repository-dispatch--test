@@ -1,0 +1,23 @@
+name: Reusable workflow example
+
+on:
+  workflow_call:
+    inputs:
+      bu:
+        required: true
+        type: string
+        
+env:
+  NODE_VERSION_TARGET: '16'
+
+jobs:
+  custom_job:
+    runs-on: ubuntu-latest
+
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: use custom action$
+        uses: ./.github/actions/test_action/
+        with:
+          user: $SECRET_NAME
