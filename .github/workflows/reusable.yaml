@@ -17,7 +17,7 @@ env:
 jobs:
   custom_job:
     runs-on: ubuntu-latest
-    if: inputs.bu == true
+    if: inputs.bu == 'true'
     steps:
       - uses: actions/checkout@v2
       - name: use custom action$
