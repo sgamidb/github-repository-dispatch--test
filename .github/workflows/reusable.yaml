@@ -6,6 +6,10 @@ on:
       bu:
         required: true
         type: string
+      publish_on:
+        required: false
+        type: string
+        default: true
         
 env:
   NODE_VERSION_TARGET: '16'
@@ -13,7 +17,7 @@ env:
 jobs:
   custom_job:
     runs-on: ubuntu-latest
-    if: inputs.bu == 'BU1'
+    if: inputs.bu == true
     steps:
       - uses: actions/checkout@v2
       - name: use custom action$
