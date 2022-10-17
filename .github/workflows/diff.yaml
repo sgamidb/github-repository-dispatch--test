@@ -23,10 +23,9 @@ jobs:
         run: |
           npm ci
       - name: Commit gherkin report
-        continue-on-error: true
         if: github.ref == 'refs/heads/main'
         run: |
-          result=$(git diff HEAD^..HEAD --name-only | grep -q .feature || "toto")
+          result=$(git diff HEAD^..HEAD --name-only | grep -q .feature || echo "toto")
           if [ $result = "toto" ]
             echo "Rien à foutre"
           else
