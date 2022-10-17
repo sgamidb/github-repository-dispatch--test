@@ -1,0 +1,33 @@
+name: 🤖 Build and validate
+
+on:
+  push
+
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [ 16.x ]
+    steps:
+      - run: echo "Start building ${{ github.ref }} from ${{ github.repository }} on ${{ runner.os }}"
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
+      - name: Install Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - name: Install dependencies
+        run: |
+          npm run initialize
+      - name: Commit gherkin report
+        if: github.ref == 'refs/heads/master'
+        run: |
+          echo "Configuring git"
+          git config --global user.email "${{ secrets.GIT_COMMIT_USER_EMAIL }}"
+          git config --global user.name "${{ secrets.GIT_COMMIT_USER_NAME }}"
+          git add --force ./use-cases/report.html
+          git commit -m "chore(use-case): update gherkin report [skip ci]"
+          git push origin main --no-verify
