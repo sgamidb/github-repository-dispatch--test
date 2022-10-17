@@ -25,10 +25,12 @@ jobs:
       - name: Commit gherkin report
         if: github.ref == 'refs/heads/main'
         run: |
-          result=$(git diff HEAD^..HEAD --name-only | grep -q .feature && echo "Need update")
+          result=$(git diff HEAD^..HEAD --name-only | grep -q .feature || echo "No update")
           if [ "$result" = "Need update" ]
           then
-            echo "au boulot"
+            echo "Nothing to do"
+          else
+            echo "Au boulot"
           fi
 
 
