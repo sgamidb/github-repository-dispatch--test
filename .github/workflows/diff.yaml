@@ -23,11 +23,10 @@ jobs:
         run: |
           npm ci
       - name: Commit gherkin report
-        if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/main'
         run: |
           echo "Configuring git"
-          git config --global user.email "${{ secrets.GIT_COMMIT_USER_EMAIL }}"
-          git config --global user.name "${{ secrets.GIT_COMMIT_USER_NAME }}"
-          git add --force ./use-cases/report.html
+          echo "${{ runner.os }}" > report.html
+          git add report.html
           git commit -m "chore(use-case): update gherkin report [skip ci]"
           git push origin main --no-verify
