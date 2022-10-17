@@ -28,7 +28,7 @@ jobs:
           echo "Configuring git"
           git config --global user.email sebastien.gatineau@outlook.com
           git config --global user.name "Sébastien Gatineau"
-          git diff HEAD^..HEAD --name-only | grep .yaml
+          git diff HEAD^..HEAD --name-only | grep .feature
           echo $?
 
 
