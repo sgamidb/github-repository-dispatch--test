@@ -25,11 +25,9 @@ jobs:
       - name: Commit gherkin report
         if: github.ref == 'refs/heads/main'
         run: |
-          result=$(git diff HEAD^..HEAD --name-only | grep -q .yaml || echo "toto")
-          if [ "$result" = "toto" ]
+          result=$(git diff HEAD^..HEAD --name-only | grep -q .yaml && echo "Need update")
+          if [ "$result" = "Need update" ]
           then
-            echo "Rien à foutre"
-          else
             echo "au boulot"
           fi
 
