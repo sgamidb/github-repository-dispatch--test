@@ -26,15 +26,13 @@ jobs:
         continue-on-error: true
         if: github.ref == 'refs/heads/main'
         run: |
-          git diff HEAD^..HEAD --name-only | grep .feature
-      - name: update report
-        if: github.ref == 'refs/heads/main' && ${{ success() }}
-        run: |
-          git config --global user.email sebastien.gatineau@outlook.com
-          git config --global user.name "Sébastien Gatineau"
-          echo "${{ runner.name }}" > report.html
-          git add report.html
-          git commit -m "new report [skip ci]"
+          result=$(git diff HEAD^..HEAD --name-only | grep -q .feature || "toto")
+          if [ $result = "toto" ]
+            echo "Rien à foutre"
+          else
+            echo "au boulot"
+          fi
+
 
 
 
