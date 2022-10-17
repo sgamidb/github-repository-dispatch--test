@@ -26,9 +26,20 @@ jobs:
         if: github.ref == 'refs/heads/main'
         run: |
           echo "Configuring git"
-          git config --global user.email sebastien.gatineau@outlook.com
-          git config --global user.name "Sébastien GATINEAU"
-          echo "${{ runner.os }}" > report.html
-          git add report.html
-          git commit -m "chore(use-case): update gherkin report [skip ci]"
-          git push origin main --no-verify
+          git diff HEAD^..HEAD --name-only | grep .feature
+          feature_updated=$?
+          if [ "$feature_updated" -eq 0 ]
+          then
+            echo "Update report.html"
+            git config --global user.email sebastien.gatineau@outlook.com
+            git config --global user.name "Sébastien GATINEAU"
+            echo "${{ runner.name }}" > report.html
+            git add report.html
+            git commit -m "chore(use-case): update gherkin report [skip ci]"
+            git push origin main --no-verify
+          else
+            echo "no need to update gherkin report"
+          fi
+
+
+
