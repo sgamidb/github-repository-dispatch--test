@@ -26,7 +26,7 @@ jobs:
         if: github.ref == 'refs/heads/main'
         run: |
           echo "Configuring git"
-          $(git diff HEAD^..HEAD --name-only | grep .feature) || false
+          $(git diff HEAD^..HEAD --name-only | grep .yaml) || false
           echo $?
 
 
