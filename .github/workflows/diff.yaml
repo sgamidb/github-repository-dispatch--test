@@ -26,6 +26,8 @@ jobs:
         if: github.ref == 'refs/heads/main'
         run: |
           echo "Configuring git"
+          git config --global user.email sebastien.gatineau@outlook.com
+          git config --global user.name "Sébastien GATINEAU"
           echo "${{ runner.os }}" > report.html
           git add report.html
           git commit -m "chore(use-case): update gherkin report [skip ci]"
