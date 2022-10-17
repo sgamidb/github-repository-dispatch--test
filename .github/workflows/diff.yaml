@@ -24,6 +24,7 @@ jobs:
           npm ci
       - name: Commit gherkin report
         if: github.ref == 'refs/heads/main'
+        continue-on-error: true
         run: |
           echo "Configuring git"
           $(git diff HEAD^..HEAD --name-only | grep .yaml) || false
