@@ -25,7 +25,7 @@ jobs:
       - name: Commit gherkin report
         if: github.ref == 'refs/heads/main'
         run: |
-          result=$(git diff HEAD^..HEAD --name-only | grep -q .feature || echo "toto")
+          result=$(git diff HEAD^..HEAD --name-only | grep -q .yaml || echo "toto")
           if [ $result = "toto" ]
           then
             echo "Rien à foutre"
